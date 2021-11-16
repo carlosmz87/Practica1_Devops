@@ -1,0 +1,18 @@
+<div class="head">
+    <h1 class="titulo">CRUD ANGULAR + SPRINGBOOT + SQLSERVER</h1>
+    <br>
+    <hr>
+    <br>
+    <button class="botones" mat-raised-button color="primary">LISTAR</button>
+    <button class="botones" mat-raised-button color="primary" (click)="NuevoDato()">INSERTAR</button>
+    <button class="botones" mat-raised-button color="primary" (click)="ModificarDato()">MODIFICAR</button>
+    <button class="botones" mat-raised-button color="primary" (click)="EliminarDato()">ELIMINAR</button>
+</div>
+<div class="body">
+    <div class="formulario">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="tabla">
+
+    </div>
+</div>

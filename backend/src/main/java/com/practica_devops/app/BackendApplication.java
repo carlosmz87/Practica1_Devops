@@ -1,4 +1,4 @@
-package com.practica_devops.backend;
+package com.practica_devops.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
