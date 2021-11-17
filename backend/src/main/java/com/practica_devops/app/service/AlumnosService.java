@@ -2,8 +2,6 @@ package com.practica_devops.app.service;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import com.practica_devops.app.entity.Alumnos;
 

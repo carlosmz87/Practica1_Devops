@@ -1,20 +1,17 @@
 <h2>INSERTAR UN REGISTRO</h2>
 <br>
+<p>{{estudiante | json}}</p>
 <hr>
 <br>
 <h4>NOMBRE DEL ESTUDIANTE: </h4>
-<input type="text">
+<input type="text" [(ngModel)]="estudiante.nombre">
 <br>
 <br>
 <h4>NUMERO DE TELEFONO: </h4>
-<input type="text">
-<br>
-<br>
-<h4>EDAD: </h4>
-<input type="text">
+<input type="text" [(ngModel)]="estudiante.telefono">
 <br>
 <br>
 <h4>CORREO ELECTRONICO: </h4>
-<input type="text">
+<input type="text" [(ngModel)]="estudiante.correo">
 <br>
-<button  mat-raised-button color="accent" class="boton">INSERTAR</button>
+<button  mat-raised-button color="accent" class="boton" (click)="Insertar()">INSERTAR</button>

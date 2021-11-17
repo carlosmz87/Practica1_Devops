@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,11 +28,13 @@ public class AlumnosController {
 	@Autowired
 	private AlumnosService alumnosService;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/add")
 	public ResponseEntity<?> create(@RequestBody Alumnos alumno){
 		return ResponseEntity.status(HttpStatus.CREATED).body(alumnosService.save(alumno));
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/alumno/{id}")
 	public ResponseEntity<?> read(@PathVariable(value="id") int id){
 		Optional<Alumnos> oAlumno = alumnosService.findById(id);
@@ -42,12 +45,14 @@ public class AlumnosController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/alumnos")
 	public List<Alumnos> readAll(){
 		List<Alumnos> alumnos = StreamSupport.stream(alumnosService.findAll().spliterator(), false).collect(Collectors.toList());
 		return alumnos;
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/modificar/{id}")
 	public ResponseEntity<?> update(@RequestBody Alumnos alumno, @PathVariable(value="id") int id){
 		Optional<Alumnos> oAlumno = alumnosService.findById(id);
@@ -60,6 +65,7 @@ public class AlumnosController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value="id") int id){
 		if(!alumnosService.findById(id).isPresent()){

@@ -9,16 +9,20 @@ import { Estudiante } from '../../estudiante/estudiante';
   styleUrls: ['./insertar.component.css']
 })
 export class InsertarComponent implements OnInit {
-  Estudiante:Estudiante = {
-    Id: 0,
-    Nombre: "",
-    Telefono: 0,
-    Edad: 0,
-    Correo: ""
+
+  estudiante:Estudiante = {
+    nombre: '',
+    telefono: 0,
+    correo: ''
   }
   constructor(private servicio:ServiceService) { }
 
   ngOnInit(): void {
   }
 
+  Insertar(){
+    this.servicio.NewEstudiante(this.estudiante).subscribe((data:Estudiante)=>{
+      console.log(data);
+    });
+  }
 }

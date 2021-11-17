@@ -10,7 +10,9 @@ import { Estudiante } from '../../estudiante/estudiante';
 })
 export class HomeComponent implements OnInit {
 
-  Estudiantes:Estudiante[] = [];
+ 
+  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'correo'];
+  estudiantes:Estudiante[] = [];
   constructor(private router:Router, private servicio:ServiceService) { }
 
   ngOnInit(): void {
@@ -26,5 +28,12 @@ export class HomeComponent implements OnInit {
 
   EliminarDato(){
     this.router.navigate(['eliminar'])
+  }
+
+  Listar(){
+    this.servicio.getEstudiantes().subscribe((data:Estudiante[])=>{
+      this.estudiantes = data;
+      console.log(this.estudiantes);
+    })
   }
 }

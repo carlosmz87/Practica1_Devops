@@ -7,6 +7,7 @@ import {MatTableModule} from '@angular/material/table';
 import { InsertarComponent } from './componentes/insertar/insertar.component';
 import { ModificarComponent } from './componentes/modificar/modificar.component';
 import { EliminarComponent } from './componentes/eliminar/eliminar.component';
+import {FormsModule}        from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EliminarComponent } from './componentes/eliminar/eliminar.component';
     CommonModule,
     AppRoutingModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule
   ],
   exports: [
     HomeComponent,

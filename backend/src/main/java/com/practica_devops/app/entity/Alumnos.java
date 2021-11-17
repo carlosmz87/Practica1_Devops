@@ -9,54 +9,54 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Table(name="ALUMNOS")
+@Table(name="alumnos")
 public class Alumnos implements Serializable{
 	
 	private static final long serialVersionUID = -9012238097867420379L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private int id;
 	
-	@Column(name = "NOMBRE",nullable=false, length = 100)
-	private String Nombre;
+	@Column(name = "nombre", length = 100)
+	private String nombre;
 	
-	@Column(name = "TELEFONO", nullable=false)
-	private int Telefono;
+	@Column(name = "telefono")
+	private int telefono;
 	
-	@Column(name = "CORREO",nullable=false, length = 100)
-	private String Correo;
+	@Column(name = "correo", length = 100)
+	private String correo;
 
 	public int getId() {
-		return Id;
+		return id;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setId(int uid) {
+		id = uid;
 	}
 
 	public String getNombre() {
-		return Nombre; 
+		return nombre; 
 	}
 
-	public void setNombre(String nombre) {
-		Nombre = nombre;
+	public void setNombre(String unombre) {
+		nombre = unombre;
 	}
 
 	public int getTelefono() {
-		return Telefono;
+		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
-		Telefono = telefono;
+	public void setTelefono(int utelefono) {
+		telefono = utelefono;
 	}
 
 	public String getCorreo() {
-		return Correo;
+		return correo;
 	}
 
-	public void setCorreo(String correo) {
-		Correo = correo;
+	public void setCorreo(String ucorreo) {
+		correo = ucorreo;
 	}
 	
 }
