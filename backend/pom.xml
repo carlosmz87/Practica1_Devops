@@ -43,12 +43,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<skipTest>${skipTests}</skipTest>
+					<finalName>springcrudback</finalName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
