@@ -4,7 +4,7 @@ pipeline{
         stage("Build"){
             steps{
                 script{
-                    dockerImage = docker.build 'carlosmz87/curso-devops'
+                    dockerImage = docker.build "carlosmz87/curso-devops"
                 }
             }
             post{
