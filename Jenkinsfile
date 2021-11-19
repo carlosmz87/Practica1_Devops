@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "========executing Build========"
+                dockerImage = docker.build 'carlosmz87/curso-devops'
             }
             post{
                 always{
