@@ -3,7 +3,9 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                dockerImage = docker.build 'carlosmz87/curso-devops'
+                script{
+                    dockerImage = docker.build 'carlosmz87/curso-devops'
+                }
             }
             post{
                 always{
@@ -35,7 +37,12 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                echo "========executing Deploy========"
+                script{
+                    docker.withRegistry('','credentials-id'){
+                        docker.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
+                    }
+                }
             }
             post{
                 always{
