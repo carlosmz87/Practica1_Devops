@@ -15,7 +15,7 @@ pipeline{
                     echo "========Build executed successfully========"
                 }
                 failure{
-                    echo "========A execution Build========"
+                    echo "========Build execution Build========"
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 script{
-                    docker.withRegistry('','credentials-id'){
+                    docker.withRegistry('','6ded101a-9ee4-4add-8efa-4bb15a91a536'){
                         docker.push("$BUILD_NUMBER")
                         dockerImage.push("latest")
                     }
