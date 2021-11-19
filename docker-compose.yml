@@ -11,13 +11,16 @@ services:
       - 3307:3306
     networks:
       - practica-devops-net
-  
+    volumes:
+      - mysql-data:/var/lib/mysql
+
   back_service:
     depends_on:
       - mysqldb
     restart: on-failure
     container_name: springcrudback
     build: ./backend
+    image: carlosmz87/springcrudback
     ports:
       - "3000:3000"
     networks:
@@ -28,12 +31,17 @@ services:
       - DATABASE_HOST=mysqldb
       - DATABASE_NAME=CURSO
       - DATABASE_PORT=3307
-  
+
   front_service:
     container_name: springcrudfront
     build: ./frontend
+    image: carlosmz87/springcrudfront 
     ports:
       - "4200:80"
+
+volumes:
+  mysql-data:
+
 networks:
   practica-devops-net:
     driver: bridge
