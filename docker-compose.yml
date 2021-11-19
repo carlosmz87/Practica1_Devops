@@ -11,6 +11,9 @@ services:
       - 3307:3306
     networks:
       - practica-devops-net
+    volumes:
+      - mysql-vol:/var/lib/mysql
+
   
   back_service:
     depends_on:
@@ -38,6 +41,8 @@ services:
 networks:
   practica-devops-net:
     driver: bridge
-    
+
+volumes:
+  mysql-vol: 
 
   
