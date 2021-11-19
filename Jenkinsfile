@@ -18,8 +18,8 @@ pipeline{
                     echo "========A execution Build========"
                 }
             }
-        },
-    stage("Test"){
+        }
+        stage("Test"){
             steps{
                 echo "========executing Test========"
             }
@@ -34,7 +34,7 @@ pipeline{
                     echo "========Test execution failed========"
                 }
             }
-        },
+        }
         stage("Deploy"){
             steps{
                 echo "========executing Deploy========"
