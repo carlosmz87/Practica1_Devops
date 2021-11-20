@@ -5,7 +5,6 @@ pipeline{
             steps{
                 script{
                     dockerImage = docker.build "carlosmz87/springcrudfront:latest"
-                    dockerImage = docker.build "carlosmz87/springcrudback:latest"
                 }
             }
            
