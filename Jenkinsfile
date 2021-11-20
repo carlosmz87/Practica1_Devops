@@ -8,32 +8,11 @@ pipeline{
                     dockerImage = docker.build "carlosmz87/springcrudback"
                 }
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========Build executed successfully========"
-                }
-                failure{
-                    echo "========Build execution Build========"
-                }
-            }
+           
         }
         stage("Test"){
             steps{
                 echo "========executing Test========"
-            }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========Test executed successfully========"
-                }
-                failure{
-                    echo "========Test execution failed========"
-                }
             }
         }
         stage("Deploy"){
@@ -45,28 +24,6 @@ pipeline{
                     }
                 }
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========Deploy executed successfully========"
-                }
-                failure{
-                    echo "========Deploy execution failed========"
-                }
-            }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
