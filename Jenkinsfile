@@ -4,7 +4,7 @@ pipeline{
         stage("Checkout"){
             steps{
                 echo "CHECKOUT"
-                git branch: 'dev', url: "https://github.com/carlosmz87/Practica1_Devops.git"
+                git branch: 'jenkins', url: "https://github.com/carlosmz87/Practica1_Devops.git"
             }
         }
         stage("Build"){
