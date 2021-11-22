@@ -32,7 +32,8 @@ pipeline{
         stage("Docker_frontend"){
             steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
-                dir('frontend'){ 
+                dir('frontend'){
+                    sh 'ng build --prod' 
                     script{
                         dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
                     }
