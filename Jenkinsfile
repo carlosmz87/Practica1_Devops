@@ -32,20 +32,22 @@ pipeline{
                 }
             }
         }
-        stage("Docker_frontend"){
-            steps{
-                echo "FRONTEND BUILD DOCKER IMAGE"
-                dir('frontend'){
-                    sh 'ls -la'
-                }
-            }
-        }
         stage("Docker_backend"){
             steps{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
                         dockerImage = docker.build "carlosmz87/springcrudback"
+                    }
+                }
+            }
+        }
+        stage("Docker_frontend"){
+            steps{
+                echo "FRONTEND BUILD DOCKER IMAGE"
+                dir('frontend'){
+                    script{
+                        dockerImage = docker.build "carlosmz87/springcrudfront"
                     }
                 }
             }
