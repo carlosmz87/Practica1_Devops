@@ -9,12 +9,13 @@ pipeline{
         }
         stage("Test"){
             steps{
-                def mvnHome = tool 'maven_home'
                 echo "BACKEND TEST"
-                dir('backend'){ 
-                    sh "mvn clean install test"
+                def mvn_version = 'M3'
+                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+                    dir('backend'){ 
+                        sh "mvn clean install test"
+                    }
                 }
-
             }
         }
         stage("Build"){
