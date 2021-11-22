@@ -6,7 +6,7 @@ pipeline{
     }
     tools {
         maven 'M3'
-        node 'nodejs'
+        nodejs 'nodejs'
     }
     stages{
         stage("Checkout"){
