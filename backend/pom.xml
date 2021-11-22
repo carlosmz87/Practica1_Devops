@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.practica_devops</groupId>
 	<artifactId>backend</artifactId>
+	<version>1.0</version>
 	<name>backend</name>
 	<description>crud spring boot</description>
 	<properties>
@@ -54,9 +55,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<finalName>springcrudback</finalName>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
