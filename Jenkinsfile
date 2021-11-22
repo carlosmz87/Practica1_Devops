@@ -21,7 +21,11 @@ pipeline{
         stage("Build"){
             steps{
                 echo "BUILD"
-                sh './m'
+                dir('backend'){ 
+                    sh 'mvn clean install -DskipTests'
+                }
+                
+                
             }
            
         }
