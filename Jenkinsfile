@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    tools {
+        maven 'M3'
+    }
     stages{
         stage("Checkout"){
             steps{
@@ -10,11 +13,8 @@ pipeline{
         stage("Test"){
             steps{
                 echo "BACKEND TEST"
-                def mvn_version = 'M3'
-                withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-                    dir('backend'){ 
-                        sh "mvn clean install test"
-                    }
+                dir('backend'){ 
+                    sh "mvn clean install test"
                 }
             }
         }
