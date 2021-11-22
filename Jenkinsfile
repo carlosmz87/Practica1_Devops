@@ -2,6 +2,9 @@ pipeline{
     agent any
     environment{
         dockerImage =''
+        registry_back = 'carlosmz87/springcrudack'
+        registry_front = 'carlosmz87/springcrudfront'
+        registryCredential = 'docher_hub'
     }
     tools {
         maven 'M3'
@@ -46,6 +49,7 @@ pipeline{
             steps{
                 echo 'FRONTEND BUILD'
                 echo 'FRONTEND BUILD PROYECT'
+                sh 'npm install'
                 sh 'npm run build --prod'
             }
         }
