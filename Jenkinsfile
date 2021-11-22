@@ -42,6 +42,13 @@ pipeline{
                 }
             }
         }
+        stage("Build_front"){
+            steps{
+                echo 'FRONTEND BUILD'
+                echo 'FRONTEND BUILD PROYECT'
+                sh 'npm run build --prod'
+            }
+        }
         stage("Docker_frontend"){
             steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
