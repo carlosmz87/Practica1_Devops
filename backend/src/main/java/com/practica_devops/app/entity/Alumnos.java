@@ -12,6 +12,14 @@ import javax.persistence.Id;
 @Table(name="alumnos")
 public class Alumnos implements Serializable{
 	
+	public Alumnos(int id, String nombre, int telefono, String correo) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.correo = correo;
+	}
+
 	private static final long serialVersionUID = -9012238097867420379L;
 
 	@Id
