@@ -6,12 +6,13 @@ pipeline{
     stages{
         stage("Checkout"){
             steps{
-                echo "CHECKOUT"
+                echo "GIT CHECKOUT STAGE"
                 git branch: 'jenkins', url: "https://github.com/carlosmz87/Practica1_Devops.git"
             }
         }
         stage("Test"){
             steps{
+                echo "TEST STAGE"
                 echo "BACKEND TEST"
                 dir('backend'){ 
                     sh "mvn test"
@@ -20,10 +21,25 @@ pipeline{
         }
         stage("Build"){
             steps{
-                echo "BUILD"
+                echo "BUILD STAGE"
+                echo "BACKEND BUILD"
+                echo "BACKEND BUILD JAR"
                 dir('backend'){ 
                     sh 'mvn clean install -DskipTests'
                 }                
+            }
+            steps{
+                echo "BACKEND BUILD DOCKER IMAGE"
+                script{
+                    dockerImage = docker.build "backend/carlosmz87/springcrudback"
+                }
+
+            }
+            steps{
+                echo "FRONTEND BUILD DOCKER IMAGE"
+                script{
+                    dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
+                }
             }
            
         }
