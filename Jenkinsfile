@@ -37,7 +37,7 @@ pipeline{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
                     script{
-                        dockerImage = docker.build carlosmz87/springcrudfront
+                        dockerImage = docker.build "carlosmz87/springcrudfront"
                     }
                 }
             }
@@ -47,7 +47,7 @@ pipeline{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
-                        dockerImage = docker.build carlosmz87/springcrudback
+                        dockerImage = docker.build "carlosmz87/springcrudback"
                     }
                 }
             }
