@@ -28,12 +28,18 @@ pipeline{
                     sh 'mvn clean install -DskipTests'
                 }
                 echo "BACKEND BUILD DOCKER IMAGE"
-                script{
-                    dockerImage = docker.build "backend/carlosmz87/springcrudback"
-                }                
+                dir('backend'){ 
+                    script{
+                        dockerImage = docker.build "backend/carlosmz87/springcrudback"
+                    }
+                }
+            
                 echo "FRONTEND BUILD DOCKER IMAGE"
-                script{
-                    dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
+                dir('frontend'){ 
+                
+                    script{
+                        dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
+                    }
                 }
             }
            
