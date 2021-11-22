@@ -27,22 +27,27 @@ pipeline{
                 dir('backend'){ 
                     sh 'mvn clean install -DskipTests'
                 }
+            }
+        }
+        stage("Docker_backend"){
+            steps{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
                         dockerImage = docker.build "backend/carlosmz87/springcrudback"
                     }
                 }
-            
+            }
+        }
+        stage("Docker_frontend"){
+            steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){ 
-                
                     script{
                         dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
                     }
                 }
             }
-           
         }
         stage("Deploy"){
             steps{
