@@ -48,7 +48,10 @@ pipeline{
             steps{
                 echo 'FRONTEND BUILD'
                 echo 'FRONTEND BUILD PROYECT'
-                sh 'npm run build --prod'
+                dir('frontend'){
+                    sh 'npm install'
+                    sh 'npm run build --prod'
+                }
             }
         }
         stage("Docker_frontend"){
