@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment{
+        dockerImage =''
+    }
     tools {
         maven 'M3'
     }
@@ -33,9 +36,8 @@ pipeline{
             steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
-                    sh 'ng build --prod' 
                     script{
-                        dockerImage = docker.build "frontend/carlosmz87/springcrudfront"
+                        dockerImage = docker.build carlosmz87/springcrudfront
                     }
                 }
             }
@@ -45,7 +47,7 @@ pipeline{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
-                        dockerImage = docker.build "backend/carlosmz87/springcrudback"
+                        dockerImage = docker.build carlosmz87/springcrudback
                     }
                 }
             }
