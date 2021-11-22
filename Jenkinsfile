@@ -23,9 +23,7 @@ pipeline{
                 echo "BUILD"
                 dir('backend'){ 
                     sh 'mvn clean install -DskipTests'
-                }
-                
-                
+                }                
             }
            
         }
