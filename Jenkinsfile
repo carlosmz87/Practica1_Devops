@@ -9,9 +9,9 @@ pipeline{
         }
         stage("Test"){
             steps{
+                def mvnHome = tool 'maven_home'
                 echo "BACKEND TEST"
-                dir('backend'){
-                    def mvnHome = tool 'maven_home'
+                dir('backend'){ 
                     sh "mvn clean install test"
                 }
 
