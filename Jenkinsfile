@@ -11,7 +11,7 @@ pipeline{
             steps{
                 echo "BACKEND TEST"
                 dir('backend'){
-                    bat "mvn clean install test"
+                    sh "mvn clean install test"
                 }
 
             }
