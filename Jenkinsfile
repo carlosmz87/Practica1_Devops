@@ -11,9 +11,10 @@ pipeline{
             steps{
                 echo "BACKEND TEST"
                 dir('backend'){
-                    sh "mvn clean install test"
+                    withMaven(maven: 'mvn') {
+                        sh "mvn clean install test"
+                    }
                 }
-
             }
         }
         stage("Build"){
