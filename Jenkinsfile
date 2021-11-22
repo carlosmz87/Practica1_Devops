@@ -36,9 +36,7 @@ pipeline{
             steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
-                    script{
-                        dockerImage = docker.build "carlosmz87/springcrudfront"
-                    }
+                    sh 'ls -la'
                 }
             }
         }
