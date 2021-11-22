@@ -6,6 +6,7 @@ pipeline{
     }
     tools {
         maven 'M3'
+        node 'nodejs'
     }
     stages{
         stage("Checkout"){
@@ -47,7 +48,6 @@ pipeline{
             steps{
                 echo 'FRONTEND BUILD'
                 echo 'FRONTEND BUILD PROYECT'
-                sh 'npm install'
                 sh 'npm run build --prod'
             }
         }
