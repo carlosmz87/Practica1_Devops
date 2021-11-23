@@ -46,9 +46,8 @@ pipeline{
                 echo "DEPLOY BACKEND"
                 echo "PUSH BACKEND IMAGE"
                 script{
-                    sh "docker login -u carlosmz87 --password-stdin lote69zona21"
-                    sh "docker push carlosmz87/springcrudback:${BUILD_NUMBER}"
-                    sh "docker push carlosmz87/springcrudback:latest"
+                   dockerImageB.push("${BUILD_NUMBER}")
+                   dockerImageB.push("latest")
                 }
             }
         }
@@ -78,9 +77,8 @@ pipeline{
                 echo "DEPLOY FRONTEND"
                 echo "PUSH FRONTEND IMAGE"
                 script{
-                    sh "docker login -u carlosmz87 --password-stdin lote69zona21"
-                    sh "docker push carlosmz87/springcrudfront:${BUILD_NUMBER}"
-                    sh "docker push carlosmz87/springcrudfront:latest" 
+                    dockerImageF.push("${BUILD_NUMBER}")
+                    dockerImageF.push("latest")
                 }
             }
         }
