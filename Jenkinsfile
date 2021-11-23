@@ -50,7 +50,7 @@ pipeline{
                 echo 'FRONTEND BUILD PROYECT'
                 dir('frontend'){
                     sh 'npm install'
-                    sh 'node_modules/.bin/ng build --prod'
+                    sh 'npm run ng build --prod'
                 }
             }
         }
