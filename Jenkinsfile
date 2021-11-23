@@ -38,9 +38,23 @@ pipeline{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
-                        dockerImageB = docker.build "carlosmz87/springcrudback"
+                        dockerImage = docker.build "carlosmz87/springcrudback"
                     }
                 }
+            }
+        }
+        stage("Deploy Backend"){
+            steps{
+                echo "DEPLOY"
+                echo "DEPLOY BACKEND"
+                echo "PUSH BACKEND IMAGE"
+                script{
+                    docker.withRegistry('',registryCredential){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
+                    }
+                }
+                
             }
         }
         stage("Build Front"){
@@ -58,15 +72,23 @@ pipeline{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
                     script{
-                        dockerImageF = docker.build "carlosmz87/springcrudfront"
+                        dockerImage = docker.build "carlosmz87/springcrudfront"
                     }
                 }
             }
         }
-        stage("Deploy App"){
+        stage("Deploy Frontend"){
             steps{
                 echo "DEPLOY"
-                sh 'docker-compose push'    
+                echo "DEPLOY FRONTEND"
+                echo "PUSH FRONTEND IMAGE"
+                script{
+                    docker.withRegistry('',registryCredential){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
+                    }
+                }
+                
             }
         }
     }
