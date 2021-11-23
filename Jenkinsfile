@@ -47,7 +47,7 @@ pipeline{
                 echo "PUSH BACKEND IMAGE"
                 dir('backend'){
                      script{
-                        docker.withRegistry('','docker_hub'){
+                        docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
                             dockerImage.push("$BUILD_NUMBER")
                             dockerImage.push("latest")
                         }
@@ -82,7 +82,7 @@ pipeline{
                 echo "PUSH FRONTEND IMAGE"
                 dir('frontend'){
                      script{
-                        docker.withRegistry('','docker_hub'){
+                        docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
                             dockerImage.push("$BUILD_NUMBER")
                             dockerImage.push("latest")
                         }
