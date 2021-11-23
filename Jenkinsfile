@@ -48,7 +48,7 @@ pipeline{
                 script{
                     withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         docker.withRegistry('', 'docker_hub') {
-                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                            sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
                             dockerImageB.push("${env.BUILD_NUMBER}")
                             dockerImageB.push("latest")
                         }
@@ -84,7 +84,7 @@ pipeline{
                 script{
                     withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         docker.withRegistry('', 'docker_hub') {
-                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                            sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
                             dockerImageF.push("${env.BUILD_NUMBER}")
                             dockerImageF.push("latest")
                         }
