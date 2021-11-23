@@ -16,7 +16,55 @@ pipeline{
                 git branch: 'jenkins', url: "https://github.com/carlosmz87/Practica1_Devops.git"
             }
         }
-        
+        stage("Test Backend"){
+            steps{
+                echo "TEST"
+                echo "BACKEND TEST"
+                dir('backend'){ 
+                    sh "mvn test"
+                }
+            }
+        }
+        stage("Build jar"){
+            steps{
+                echo "BUILD"
+                echo "BACKEND BUILD"
+                echo "BACKEND BUILD JAR"
+                dir('backend'){ 
+                    sh 'mvn clean install -DskipTests'
+                }
+            }
+        }
+        stage("Docker Backend"){
+            steps{
+                echo "BACKEND BUILD DOCKER IMAGE"
+                dir('backend'){ 
+                    script{
+                        dockerImageB = docker.build "carlosmz87/springcrudback"
+                    }
+                }
+            }
+        }
+        stage("Build Front"){
+            steps{
+                echo 'FRONTEND BUILD'
+                echo 'FRONTEND BUILD PROYECT'
+                dir('frontend'){
+                    sh 'npm install'
+                    sh 'npm run ng build --prod'
+                }
+            }
+        }
+        stage("Docker Frontend"){
+            steps{
+                echo "FRONTEND BUILD DOCKER IMAGE"
+                dir('frontend'){
+                    script{
+                        dockerImageF = docker.build "carlosmz87/springcrudfront"
+                    }
+                }
+            }
+        }
         stage("Deploy Backend"){
             steps{
                 echo "DEPLOY"
@@ -24,7 +72,6 @@ pipeline{
                 echo "PUSH BACKEND IMAGE"
                 script{
                     docker.withRegistry('',registryCredential){
-                        dockerImageB.push("${BUILD_ID}")
                         dockerImageB.push("latest")
                     }
                 }
@@ -37,7 +84,6 @@ pipeline{
                 echo "PUSH FRONTEND IMAGE"
                 script{
                     docker.withRegistry('',registryCredential){
-                        dockerImageF.push("${BUILD_ID}")
                         dockerImageF.push("latest")
                     }
                 }
