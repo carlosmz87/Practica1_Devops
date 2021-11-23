@@ -1,8 +1,5 @@
 pipeline{
     agent any
-    environment{
-        registryCredential = 'docher_hub'
-    }
     tools {
         maven 'M3'
         nodejs 'nodejs'
@@ -50,7 +47,7 @@ pipeline{
                 echo "PUSH BACKEND IMAGE"
                 dir('backend'){
                      script{
-                        docker.withRegistry('',registryCredential){
+                        docker.withRegistry('','docker_hub'){
                             dockerImage.push("$BUILD_NUMBER")
                             dockerImage.push("latest")
                         }
@@ -85,7 +82,7 @@ pipeline{
                 echo "PUSH FRONTEND IMAGE"
                 dir('frontend'){
                      script{
-                        docker.withRegistry('',registryCredential){
+                        docker.withRegistry('','docker_hub'){
                             dockerImage.push("$BUILD_NUMBER")
                             dockerImage.push("latest")
                         }
