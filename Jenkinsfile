@@ -69,10 +69,10 @@ pipeline{
             steps{
                 echo "DEPLOY"
                 echo "DEPLOY BACKEND"
-                echo "PULL BACKEND IMAGE"
+                echo "PUSH BACKEND IMAGE"
                 script{
                     docker.withRegistry('',registryCredential){
-                        dockerImageB.push("$BUILD_ID")
+                        dockerImageB.push("${env.BUILD_ID}")
                         dockerImageB.push("latest")
                     }
                 }
@@ -82,10 +82,10 @@ pipeline{
          stage("Deploy Frontend"){
             steps{
                 echo "DEPLOY FRONTEND"
-                echo "PULL FRONTEND IMAGE"
+                echo "PUSH FRONTEND IMAGE"
                 script{
                     docker.withRegistry('',registryCredential){
-                        dockerImageF.push("$BUILD_ID")
+                        dockerImageF.push("${env.BUILD_ID}")
                         dockerImageF.push("latest")
                     }
                 }
