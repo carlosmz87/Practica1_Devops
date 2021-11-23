@@ -1,7 +1,8 @@
 pipeline{
     agent any
     environment{
-        dockerImage =''
+        dockerImageB =''
+        dockerImageF =''
         registryCredential = 'docher_hub'
     }
     tools {
@@ -15,18 +16,18 @@ pipeline{
                 git branch: 'jenkins', url: "https://github.com/carlosmz87/Practica1_Devops.git"
             }
         }
-        stage("Test"){
+        stage("Test Backend"){
             steps{
-                echo "TEST STAGE"
+                echo "TEST"
                 echo "BACKEND TEST"
                 dir('backend'){ 
                     sh "mvn test"
                 }
             }
         }
-        stage("Build_jar"){
+        stage("Build jar"){
             steps{
-                echo "BUILD STAGE"
+                echo "BUILD"
                 echo "BACKEND BUILD"
                 echo "BACKEND BUILD JAR"
                 dir('backend'){ 
@@ -34,17 +35,17 @@ pipeline{
                 }
             }
         }
-        stage("Docker_backend"){
+        stage("Docker Backend"){
             steps{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
-                        dockerImage = docker.build "carlosmz87/springcrudback"
+                        dockerImageB = docker.build "carlosmz87/springcrudback"
                     }
                 }
             }
         }
-        stage("Build_front"){
+        stage("Build Front"){
             steps{
                 echo 'FRONTEND BUILD'
                 echo 'FRONTEND BUILD PROYECT'
@@ -54,19 +55,40 @@ pipeline{
                 }
             }
         }
-        stage("Docker_frontend"){
+        stage("Docker Frontend"){
             steps{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
                     script{
-                        dockerImage = docker.build "carlosmz87/springcrudfront"
+                        dockerImageF = docker.build "carlosmz87/springcrudfront"
                     }
                 }
             }
         }
-        stage("Deploy"){
+        stage("Deploy Backend"){
             steps{
                 echo "DEPLOY"
+                echo "DEPLOY BACKEND"
+                echo "PULL BACKEND IMAGE"
+                script{
+                    docker.withRegistry('',registryCredential){
+                        dockerImageB.push("$BUILD_ID")
+                        dockerImageB.push("latest")
+                    }
+                }
+                
+            }
+        }
+         stage("Deploy Frontend"){
+            steps{
+                echo "DEPLOY FRONTEND"
+                echo "PULL FRONTEND IMAGE"
+                script{
+                    docker.withRegistry('',registryCredential){
+                        dockerImageF.push("$BUILD_ID")
+                        dockerImageF.push("latest")
+                    }
+                }
                 
             }
         }
