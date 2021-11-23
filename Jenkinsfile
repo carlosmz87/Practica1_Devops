@@ -47,7 +47,7 @@ pipeline{
                 echo "PUSH BACKEND IMAGE"
                 script{
                     withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('', 'docker_hub') {
+                        docker.withRegistry('https://registry-1.docker.io/v2/', 'docker_hub') {
                             sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
                             dockerImageB.push("${env.BUILD_NUMBER}")
                             dockerImageB.push("latest")
@@ -83,7 +83,7 @@ pipeline{
                 echo "PUSH FRONTEND IMAGE"
                 script{
                     withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('', 'docker_hub') {
+                        docker.withRegistry('https://registry-1.docker.io/v2/', 'docker_hub') {
                             sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
                             dockerImageF.push("${env.BUILD_NUMBER}")
                             dockerImageF.push("latest")
