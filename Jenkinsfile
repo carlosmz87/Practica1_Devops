@@ -45,14 +45,12 @@ pipeline{
                 echo "DEPLOY"
                 echo "DEPLOY BACKEND"
                 echo "PUSH BACKEND IMAGE"
-                dir('backend'){
-                     script{
-                        docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
-                            dockerImage.push("$BUILD_NUMBER")
-                            dockerImage.push("latest")
-                        }
+                script{
+                    docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
                     }
-                }    
+                }
             }
         }
         stage("Build Front"){
@@ -80,14 +78,12 @@ pipeline{
                 echo "DEPLOY"
                 echo "DEPLOY FRONTEND"
                 echo "PUSH FRONTEND IMAGE"
-                dir('frontend'){
-                     script{
-                        docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
-                            dockerImage.push("$BUILD_NUMBER")
-                            dockerImage.push("latest")
-                        }
+                script{
+                    docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push("latest")
                     }
-                } 
+                }
             }
         }
     }
