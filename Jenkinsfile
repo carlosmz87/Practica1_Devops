@@ -71,7 +71,8 @@ pipeline{
                 echo "DEPLOY BACKEND"
                 echo "PUSH BACKEND IMAGE"
                 script{
-                    docker.withRegistry('https://registry.hub.docker.com',registryCredential){
+                    docker.withRegistry('',registryCredential){
+                        dockerImageB.push("$BUILD_NUMBER")
                         dockerImageB.push("latest")
                     }
                 }
@@ -83,7 +84,8 @@ pipeline{
                 echo "DEPLOY FRONTEND"
                 echo "PUSH FRONTEND IMAGE"
                 script{
-                    docker.withRegistry('https://registry.hub.docker.com',registryCredential){
+                    docker.withRegistry('',registryCredential){
+                        dockerImageF.push("$BUILD_NUMBER")
                         dockerImageF.push("latest")
                     }
                 }
