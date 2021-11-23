@@ -35,7 +35,7 @@ pipeline{
                 echo "BACKEND BUILD DOCKER IMAGE"
                 dir('backend'){ 
                     script{
-                        dockerImage = docker.build "carlosmz87/springcrudback"
+                        dockerImageB = docker.build "carlosmz87/springcrudback"
                     }
                 }
             }
@@ -46,9 +46,12 @@ pipeline{
                 echo "DEPLOY BACKEND"
                 echo "PUSH BACKEND IMAGE"
                 script{
-                    docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push("latest")
+                    withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        docker.withRegistry('', 'docker_hub') {
+                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                            dockerImageB.push("${env.BUILD_NUMBER}")
+                            dockerImageB.push("latest")
+                        }
                     }
                 }
             }
@@ -68,7 +71,7 @@ pipeline{
                 echo "FRONTEND BUILD DOCKER IMAGE"
                 dir('frontend'){
                     script{
-                        dockerImage = docker.build "carlosmz87/springcrudfront"
+                        dockerImageF = docker.build "carlosmz87/springcrudfront"
                     }
                 }
             }
@@ -79,9 +82,12 @@ pipeline{
                 echo "DEPLOY FRONTEND"
                 echo "PUSH FRONTEND IMAGE"
                 script{
-                    docker.withRegistry('','2a2c232e-fdb3-473f-81c9-582e546d2c1c'){
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push("latest")
+                    withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                        docker.withRegistry('', 'docker_hub') {
+                            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                            dockerImageF.push("${env.BUILD_NUMBER}")
+                            dockerImageF.push("latest")
+                        }
                     }
                 }
             }
