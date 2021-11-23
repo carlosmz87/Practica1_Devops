@@ -46,11 +46,9 @@ pipeline{
                 echo "DEPLOY BACKEND"
                 echo "PUSH BACKEND IMAGE"
                 script{
-                    withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
-                        dockerImageB.push("${env.BUILD_NUMBER}")
-                        dockerImageB.push("latest")
-                    }
+                    sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
+                    sh "docker push carlosmz87/springcrudback:${BUILD_NUMBER}"
+                    sh "docker push carlosmz87/springcrudback:latest"
                 }
             }
         }
@@ -80,11 +78,9 @@ pipeline{
                 echo "DEPLOY FRONTEND"
                 echo "PUSH FRONTEND IMAGE"
                 script{
-                    withCredentials([usernamePassword( credentialsId: 'docker_hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
-                        dockerImageF.push("${env.BUILD_NUMBER}")
-                        dockerImageF.push("latest")
-                    }
+                    sh "docker login -u ${USERNAME} --password-stdin ${PASSWORD}"
+                    sh "docker push carlosmz87/springcrudfront:${BUILD_NUMBER}"
+                    sh "docker push carlosmz87/springcrudfront:latest" 
                 }
             }
         }
