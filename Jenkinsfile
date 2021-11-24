@@ -67,17 +67,10 @@ pipeline{
             steps{
                 echo "DEPLOY"
                 echo "PUSH BACKEND IMAGE"
-                sh 'docker push carlosmz87/springcrudback:latest'
-                sh 'docker push carlosmz87/springcrudback:$BUILD_NUMBER'
+               
                 echo "PUSH FRONTEND IMAGE"
-                sh 'docker push carlosmz87/springcrudfront:latest'
-                sh 'docker push carlosmz87/springcrudfront:$BUILD_NUMBER'
+               
             }
-        }
-    }
-    post{
-        always{
-            sh 'docker logout'
         }
     }
 }
