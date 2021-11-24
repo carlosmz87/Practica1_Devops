@@ -68,9 +68,10 @@ pipeline{
                 echo "DEPLOY"
                 echo "LOGIN DOCKERHUB"
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                echo "PUSH FRONTEND IMAGE"
+                echo "PUSH BACKEND IMAGE"
                 sh 'docker push carlosmz87/springcrudback:latest'
                 sh 'docker push carlosmz87/springcrudback:$BUILD_NUMBER'
+                echo "PUSH FRONTEND IMAGE"
                 sh 'docker push carlosmz87/springcrudfront:latest'
                 sh 'docker push carlosmz87/springcrudfront:$BUILD_NUMBER'
             }
