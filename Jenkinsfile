@@ -4,6 +4,9 @@ pipeline{
         maven 'M3'
         nodejs 'nodejs'
     }
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+    }
     stages{
         stage("Checkout"){
             steps{
@@ -40,17 +43,6 @@ pipeline{
                 }
             }
         }
-        stage("Deploy Backend"){
-            steps{
-                echo "DEPLOY"
-                echo "DEPLOY BACKEND"
-                echo "PUSH BACKEND IMAGE"
-                script{
-                   dockerImageB.push("${BUILD_NUMBER}")
-                   dockerImageB.push("latest")
-                }
-            }
-        }
         stage("Build Front"){
             steps{
                 echo 'FRONTEND BUILD'
@@ -71,16 +63,22 @@ pipeline{
                 }
             }
         }
-        stage("Deploy Frontend"){
+        stage("Deploy App"){
             steps{
                 echo "DEPLOY"
-                echo "DEPLOY FRONTEND"
+                echo "LOGIN DOCKERHUB"
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "PUSH FRONTEND IMAGE"
-                script{
-                    dockerImageF.push("${BUILD_NUMBER}")
-                    dockerImageF.push("latest")
-                }
+                sh 'docker push carlosmz87/springcrudback:latest'
+                sh 'docker push carlosmz87/springcrudback:$BUILD_NUMBER'
+                sh 'docker push carlosmz87/springcrudfront:latest'
+                sh 'docker push carlosmz87/springcrudfront:$BUILD_NUMBER'
             }
+        }
+    }
+    post{
+        always{
+            sh 'docker logout'
         }
     }
 }
