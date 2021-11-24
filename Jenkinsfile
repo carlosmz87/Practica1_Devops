@@ -66,8 +66,6 @@ pipeline{
         stage("Deploy App"){
             steps{
                 echo "DEPLOY"
-                echo "LOGIN DOCKERHUB"
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "PUSH BACKEND IMAGE"
                 sh 'docker push carlosmz87/springcrudback:latest'
                 sh 'docker push carlosmz87/springcrudback:$BUILD_NUMBER'
