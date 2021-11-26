@@ -66,7 +66,8 @@ pipeline{
         stage("Deploy App"){
             steps{
                 echo "DEPLOY"
-                sh 'docker-compose push'
+
+                sh '/usr/local/bin/docker-compose push'
                
             }
         }
