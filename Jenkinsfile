@@ -66,9 +66,7 @@ pipeline{
         stage("Deploy App"){
             steps{
                 echo "DEPLOY"
-                echo "PUSH BACKEND IMAGE"
-               
-                echo "PUSH FRONTEND IMAGE"
+                sh 'docker-compose push'
                
             }
         }
