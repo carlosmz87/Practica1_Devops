@@ -60,17 +60,17 @@ pipeline{
                 }
             }
         }
-        stage("Deploy App"){
+        stage("Deliver App"){
             steps{
-                echo "DEPLOY"
+                echo "DELIVER"
                 script{
                     docker.withRegistry('', 'docker-hub'){
-                        echo "DEPLOY BACKEND"
+                        echo "DELIVER BACKEND"
                         dockerImageB.push('$BUILD_NUMBER')
                         dockerImageB.push('latest')
-                        echo "DEPLOY FRONTEND"
+                        echo "DELIVER FRONTEND"
                         dockerImageF.push('$BUILD_NUMBER')
-                        dockerImageF.push('$latest')
+                        dockerImageF.push('latest')
                     }
                 }               
             }
