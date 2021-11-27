@@ -66,9 +66,16 @@ pipeline{
         stage("Deploy App"){
             steps{
                 echo "DEPLOY"
-
-                sh '/usr/local/bin/docker-compose push'
-               
+                script{
+                    docker.withRegistry('', 'docker-hub'){
+                        echo "DEPLOY BACKEND"
+                        dockerImageB.push('$BUILD_NUMBER')
+                        dockerImageB.push('latest')
+                        echo "DEPLOY FRONTEND"
+                        dockerImageF.push('$BUILD_NUMBER')
+                        dockerImageF.push('$latest')
+                    }
+                }               
             }
         }
     }
