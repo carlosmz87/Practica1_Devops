@@ -4,9 +4,6 @@ pipeline{
         maven 'M3'
         nodejs 'nodejs'
     }
-    environment{
-        DOCKERHUB_CREDENTIALS = credentials('docker-hub')
-    }
     stages{
         stage("Checkout"){
             steps{
