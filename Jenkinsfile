@@ -5,7 +5,7 @@ pipeline{
         nodejs 'nodejs'
     }
     environment{
-        DOCKERHUB_CREDENTIALS = credentials('docker_hub')
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub')
     }
     stages{
         stage("Checkout"){
