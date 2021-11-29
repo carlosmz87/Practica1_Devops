@@ -11,7 +11,9 @@ import javax.persistence.Id;
 @Entity
 @Table(name="alumnos")
 public class Alumnos implements Serializable{
-	
+	public Alumnos(){
+
+	}
 	public Alumnos(int id, String nombre, int telefono, String correo) {
 		super();
 		this.id = id;
