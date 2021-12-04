@@ -11,8 +11,10 @@ terraform {
 provider "aws" {
   region = "us-east-1"
   default_tags {
-      Environment = "Produccion"
-      Owner = "Carlos Martinez"
-      Proyect = "Practica1_Devops"
+      tags = {
+        Environment = "Produccion"
+        Owner = "Carlos Martinez"
+        Proyect = "Practica1_Devops"
+      }
   }
 }
